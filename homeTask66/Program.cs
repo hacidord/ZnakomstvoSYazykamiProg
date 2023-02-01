@@ -4,6 +4,10 @@
 //M = 1; N = 15 -> 120
 //M = 4; N = 8. -> 30
 
+//                                 Задача 65
+// Задайте значения M и N. Напишите программу, которая найдёт все натуральные элементы в промежутке от M до N.
+// ---------------------------------------------------------------------
+
 // Чтение данных из консоли
 int ReadData(string line)
 {
@@ -13,24 +17,24 @@ int ReadData(string line)
 }
 
 // Печать результата
-void SumMN(int M, int N, int sum)
+void PrintResult(int prefix)
 {
-     sum = sum + N;
-     if (N <= M)
-    {
-         Console.Write($" {sum} ");
-         return;
-     }
-     SumMN(M, N - 1, sum);
+    Console.WriteLine(prefix);
+}
+
+int RecMN(int M, int N, int sum = 0)
+{
+    if (M >= N) return sum + N;
+     sum = M + RecMN(M + 1, N);
+    return sum;
 }
 
 int number1 = ReadData("Введите число M: ");
 int number2 = ReadData("Введите число N: ");
-int sum = 0;
-if (number1 < number2)
+if (number1 > number2)
 {
-    int t = number1;
+    int swap = number1;
     number1 = number2;
-    number2 = t;
+    number2 = swap;
 }
-SumMN(number1, number2, sum);
+PrintResult(RecMN(number1,number2));
